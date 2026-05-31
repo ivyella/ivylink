@@ -15,7 +15,7 @@ pub fn apply(config_path: PathBuf, old: &HashSet<String>) -> HashSet<String> {
         let source = source.replacen("~/", &format!("{}/", home.display()), 1);
         let target = target.replacen("~/", &format!("{}/", home.display()), 1);
 
-        if !old.contains(&target) {
+        if !old.contains(&target) || !std::path::Path::new(&target).exists() {
             match std::os::unix::fs::symlink(&source, &target) {
                 Ok(_) => println!("linked: {} -> {}", source, target),
                 Err(e) => eprintln!("error linking {}: {}", source, e),
