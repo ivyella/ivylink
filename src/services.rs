@@ -1,7 +1,7 @@
 use std::collections::HashSet;
 use std::path::PathBuf;
 
-pub fn apply(config_path: PathBuf, old: &HashSet<String>) -> HashSet<String> {
+pub fn apply(config_path: PathBuf) -> HashSet<String> {
     let content = std::fs::read_to_string(&config_path).expect("could not read config file");
     let doc: kdl::KdlDocument = content.parse().expect("could not parse config");
     let services = doc.get("services").expect("no services section in config");

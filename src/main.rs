@@ -17,7 +17,7 @@ fn main() {
         "apply" => {
             let old = lockfile::read();
             let mut new_targets = symlinks::apply(config_path.clone(), &old);
-            let service_targets = services::apply(config_path, &old);
+            let service_targets = services::apply(config_path);
             new_targets.extend(service_targets);
             lockfile::write(&new_targets);
         }
@@ -32,7 +32,7 @@ fn main() {
                         println!("usage: ivylink theme apply <pack> <variant>");
                         return;
                     }
-                    theme::apply(&args[3], &args[4])
+                    theme::apply(config_path, &args[3], &args[4])
                 }
                 _ => println!("usage: ivylink theme apply <pack> <variant>"),
             }
