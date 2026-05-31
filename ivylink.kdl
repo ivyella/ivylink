@@ -1,6 +1,5 @@
 
 symlinks {
-    test source="~/ivylink-test-source" target="~/ivylink-test-target"
 }
 
 themes {

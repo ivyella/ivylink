@@ -30,6 +30,7 @@ pub fn apply(config_path: PathBuf) {
     for stale in old.difference(&new_targets) {
         std::fs::remove_file(stale)
             .unwrap_or_else(|e| eprintln!("error removing {}: {}", stale, e));
+        println!("removed: {}", stale);
     }
 
     lockfile::write(&new_targets);
