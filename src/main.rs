@@ -1,4 +1,5 @@
 mod config;
+mod lockfile;
 mod services;
 mod symlinks;
 mod theme;
