@@ -1,14 +1,12 @@
-use crate::lockfile;
 use std::collections::HashSet;
 use std::path::PathBuf;
 
-pub fn apply(config_path: PathBuf) {
+pub fn apply(config_path: PathBuf, old: &HashSet<String>) -> HashSet<String> {
     let content = std::fs::read_to_string(&config_path).expect("could not read config file");
     let doc: kdl::KdlDocument = content.parse().expect("could not parse config");
     let symlinks = doc.get("symlinks").expect("no symlinks section in config");
     let children = symlinks.children().unwrap().nodes();
     let home = dirs::home_dir().unwrap();
-    let old = lockfile::read();
     let mut new_targets: HashSet<String> = HashSet::new();
 
     for node in children {
@@ -32,6 +30,5 @@ pub fn apply(config_path: PathBuf) {
             .unwrap_or_else(|e| eprintln!("error removing {}: {}", stale, e));
         println!("removed: {}", stale);
     }
-
-    lockfile::write(&new_targets);
+    new_targets
 }

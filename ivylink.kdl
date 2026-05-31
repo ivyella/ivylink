@@ -19,5 +19,5 @@ themes {
 }
 
 services {
-    quickshell exec="/usr/bin/qs" restart="on-failure" partOf="graphical-session.target" wantedBy="graphical-session.target"
+    //test-service exec="/usr/bin/test" restart="on-failure" partOf="graphical-session.target" wantedBy="graphical-session.target"
 }

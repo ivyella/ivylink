@@ -14,7 +14,13 @@ fn main() {
     }
 
     match args[1].as_str() {
-        "apply" => symlinks::apply(config_path),
+        "apply" => {
+            let old = lockfile::read();
+            let mut new_targets = symlinks::apply(config_path.clone(), &old);
+            let service_targets = services::apply(config_path, &old);
+            new_targets.extend(service_targets);
+            lockfile::write(&new_targets);
+        }
         "theme" => {
             if args.len() < 3 {
                 println!("usage: ivylink theme apply <pack> <variant>");
