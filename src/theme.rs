@@ -34,7 +34,6 @@ pub fn apply(config_path: PathBuf, pack: &str, variant: &str) {
         for (key, value) in color_map {
             let hex = value.as_str().unwrap().to_string();
             vars.insert(key.clone(), hex.clone());
-            // also insert raw version (strip the #)
             vars.insert(
                 format!("{}_raw", key),
                 hex.trim_start_matches('#').to_string(),
@@ -52,7 +51,6 @@ pub fn apply(config_path: PathBuf, pack: &str, variant: &str) {
         let template = node.get("template").unwrap().as_string().unwrap();
         let output = node.get("output").unwrap().as_string().unwrap();
 
-        // find template - check local first, then ~/.config/ivylink
         let template_path = if PathBuf::from(format!("themes/templates/{}", template)).exists() {
             PathBuf::from(format!("themes/templates/{}", template))
         } else {
