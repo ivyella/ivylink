@@ -1,1 +1,5 @@
 /target
+*.pkg.tar.gz
+*.pkg.tar.zst
+*.src.tar.gz
+*-debug-*
