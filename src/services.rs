@@ -36,5 +36,10 @@ WantedBy={wanted_by}
         println!("wrote service: {}", service_path.display());
         new_services.insert(service_path.to_string_lossy().to_string());
     }
+    std::process::Command::new("systemctl")
+        .args(["--user", "daemon-reload"])
+        .status()
+        .unwrap_or_else(|e| panic!("failed to reload systemd: {}", e));
+    println!("reloaded systemd user daemon");
     new_services
 }
