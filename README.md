@@ -13,3 +13,7 @@ ivylink is configured via `config.kdl`. See `template.kdl` for a full example.
 
 ## Status
 WIP — Probably usable, i'm using it! will make more fixes in the future and clean things up more
+
+
+
+## For more info check the wiki page in the repo :D
