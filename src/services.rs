@@ -11,9 +11,9 @@ pub fn apply(config_path: PathBuf) -> HashSet<String> {
     for node in children {
         let name = node.name().value();
         let exec = node.get("exec").unwrap().as_string().unwrap();
-        let restart = node.get("restart").unwrap().as_string().unwrap(); // and this!
-        let part_of = node.get("partOf").unwrap().as_string().unwrap(); // and this!
-        let wanted_by = node.get("wantedBy").unwrap().as_string().unwrap(); // and this!
+        let restart = node.get("restart").unwrap().as_string().unwrap();
+        let part_of = node.get("partOf").unwrap().as_string().unwrap();
+        let wanted_by = node.get("wantedBy").unwrap().as_string().unwrap();
         let service_content = format!(
             "[Unit]
 Description={name}
